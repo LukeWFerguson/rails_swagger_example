@@ -43,6 +43,13 @@ paths:
               required:
               - name
               - status
+    get:
+      summary: Retrieves all pets
+      tags:
+      - Pets
+      responses:
+        '200':
+          description: name found
   "/api/v1/pets/{id}":
     get:
       summary: Retrieves a pet

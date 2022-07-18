@@ -29,6 +29,28 @@ describe 'Pets API' do
     end
   end
 
+  path '/api/v1/pets' do
+
+    get 'Retrieves all pets' do
+      tags 'Pets'
+      consumes 'application/json', 'application/xml'
+
+      response '200', 'name found' do
+        schema type: :object,
+          properties: {
+            id: { type: :integer, },
+            name: { type: :string },
+            photo_url: { type: :string },
+            status: { type: :string }
+          },
+          required: [ 'id', 'name', 'status' ]
+
+        let(:id) { Pet.create(name: 'foo', status: 'bar', photo_url: 'http://example.com/avatar.jpg').id }
+        run_test!
+      end
+    end
+  end
+
   path '/api/v1/pets/{id}' do
 
     get 'Retrieves a pet' do
